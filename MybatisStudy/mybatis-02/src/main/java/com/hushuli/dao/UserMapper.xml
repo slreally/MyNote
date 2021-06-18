@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hushuli.dao.UserMapper">
+    <select id="findAll" resultType="user">
+        select * from USER
+    </select>
+
+    <insert id="insert" parameterType="user">
+        insert into user(name, password, age) values (#{name}, #{password}, #{age})
+    </insert>
+
+    <!--分页查询-->
+    <select id="findLimit" resultType="user">
+        select * from USER limit #{startIndex},#{pageSize}
+    </select>
+
+    <!--动态sql-->
+    <select id="findDynamic" resultType="user" parameterType="HashMap">
+        select * from USER where 1=1
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+    </select>
+
+    <!--结果映射-->
+    <select id="findResultMap" resultMap="userMap" parameterType="int">
+        select
+               u.id,
+               u.name as myname,
+               u.password,
+               u.age
+        from USER u
+        where
+            u.id = #{id}
+    </select>
+
+    <resultMap id="userMap" type="user">
+        <result property="name" column="myname"/>
+    </resultMap>
+</mapper>

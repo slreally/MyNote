@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--属性配置：1.导入外部文件 2.在其中导入一些属性配置
+                如果两个文件有同一个字段，优先使用外部配置文件的-->
+    <properties resource="db.properties">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+    </properties>
+    <!--日志设置-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--类型别名-->
+    <typeAliases>
+        <typeAlias type="com.hushuli.entity.User" alias="user"/>
+    </typeAliases>
+    <!--环境配置：1.事务管理器 默认jdbc 2.数据源-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--注册 mapper 文件，两种方法：1.使用resource注册xml文件 2.使用class注册java接口-->
+    <mappers>
+        <!--<mapper resource="com/hushuli/dao/UserMapper.xml"/>-->
+        <mapper class="com.hushuli.dao.UserMapper"/>
+    </mappers>
+</configuration>
