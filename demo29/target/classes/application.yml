@@ -5,8 +5,8 @@ spring:
     password: Qianrui1994
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
+    show-sql: true  #在控制台可以查看hibernate发送的sql语句
     properties:
       hibernate:
-        format_sql: true
+        format_sql: true  #格式化sql
     open-in-view: false
