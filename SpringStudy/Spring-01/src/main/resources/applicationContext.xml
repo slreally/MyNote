@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--作用域：单例模式 原型模式
+           spring默认的是单例模式，每次从容器中 get 的时候都会获得相同的对象，适用单线程；
+           普通的 new 一个对象是原型模式，每次从容器中 get 的时候会获取一个新的对象，适用多线程-->
+    <bean id="user" class="com.hushuli.entity.User" scope="prototype">
+        <property name="name" value="小乔"/>
+    </bean>
+
+    <!--自动装配-->
+    <bean id="cat" class="com.hushuli.entity.Cat"/>
+    <bean id="dog" class="com.hushuli.entity.Dog"/>
+    <bean id="people3" class="com.hushuli.entity.People"/>
+    <!--    <bean id="people" class="com.hushuli.entity.People">
+            <property name="cat" ref="cat"/>
+            <property name="dog" ref="dog"/>
+        </bean>
+        &lt;!&ndash;自动装配：
+                byName：会自动在容器上下文中查找和自己 set 方法后面的值对应的bean id
+                byType：会自动在容器上下文中查找和自己属性类型对应的bean&ndash;&gt;
+        <bean id="people1" class="com.hushuli.entity.People" autowire="byName"/>
+        <bean id="people2" class="com.hushuli.entity.People" autowire="byType"/>-->
+
+    <!--使用注解实现自动装配-->
+    <!--指定注解扫描的包-->
+    <context:component-scan base-package="com.hushuli.entity"/>
+
+</beans>
