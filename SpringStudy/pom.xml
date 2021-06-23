@@ -12,6 +12,9 @@
         <module>Spring-01</module>
         <module>spring-02</module>
         <module>Srping-02</module>
+        <module>Spring-aop-1</module>
+        <module>Spring-aop-2</module>
+        <module>Spring-aop-3</module>
     </modules>
 
     <properties>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--注册bean-->
+    <bean id="userService" class="com.hushuli.service.UserServiceImpl"/>
+    <bean id="loger" class="com.hushuli.aop.Loger"/>
+    <bean id="afterLoger" class="com.hushuli.aop.AfterLoger"/>
+
+    <!--aop的配置-->
+    <aop:config>
+        <!--切入点 expression:表达式匹配要执行的方法-->
+        <aop:pointcut id="p1" expression="execution(* com.hushuli.service.UserServiceImpl.*(..))"/>
+        <!--执行环绕-->
+        <aop:advisor advice-ref="loger" pointcut-ref="p1"/>
+        <aop:advisor advice-ref="afterLoger" pointcut-ref="p1"/>
+    </aop:config>
+</beans>
